@@ -1,10 +1,19 @@
-This patch restores HTML and PDF note export on Obsidian 1.13.
+This patch fixes code-block scroll jumps and disappearing content in Reading view and Live Preview.
+
+## What's New
+
+- Code-block formatting updates locally without refreshing the entire Reading view.
 
 ## Bug Fixes
 
-- **PDF and HTML export works without MathJax**: Code Suite now flushes MathJax styles only when the rendered note actually contains math. Notes without math no longer stop silently after the export options dialog.
-- **Visible export failures**: errors while building the standalone document now appear in an Obsidian notice and the developer console, instead of leaving the command apparently unresponsive.
+- Fix notes jumping when editing code blocks beside a Reading view pane, including changes to the language, content, or options such as `static` ([#67](https://github.com/felixleopold/obsidian-code-suite/issues/67)).
+- Fix blank content below large blocks after scrolling through them and collapsing them in Reading view.
+- Keep duplicate code blocks and blocks in separate editor panes independent, preserving the correct block state through edits.
+- Remeasure Live Preview blocks when collapse, output, or embedded content changes their height.
 
-No manual steps are required.
+## Upgrade Notes
 
-See [PR #66](https://github.com/felixleopold/obsidian-code-suite/pull/66).
+- No settings changes or manual migration are required.
+- Thanks to @luckman212 for the detailed report and investigation.
+
+See [PR #69](https://github.com/felixleopold/obsidian-code-suite/pull/69).
