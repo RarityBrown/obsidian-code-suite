@@ -71,10 +71,11 @@ end
 IS_SCRIPT_SOURCE = f"""function isScript = {IS_SCRIPT_FUNCTION}(name)
 isScript = false;
 try
-    nargin(name);
+    % builtin() keeps registered functions from shadowing the probe.
+    builtin('nargin', name);
 catch exception
     % Leave syntax errors to the normal registration/execution path.
-    isScript = strcmp(exception.identifier, 'MATLAB:nargin:isScript');
+    isScript = builtin('strcmp', exception.identifier, 'MATLAB:nargin:isScript');
 end
 end
 """

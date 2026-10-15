@@ -305,6 +305,8 @@ class MatlabWorkerIntegrationTests(unittest.TestCase):
         return active
 
     def test_screenshot_script_runs_once_without_replacing_a_registered_function(self) -> None:
+        if self.engine.isMATLABReleaseOlderThan("R2024a"):
+            self.skipTest("function-first scripts require MATLAB R2024a or later")
         self.run_code("function y = test_fun(x)\ny = x + 10;\nend")
         registered = self.session_dir / "test_fun.m"
         previous = registered.read_bytes()
